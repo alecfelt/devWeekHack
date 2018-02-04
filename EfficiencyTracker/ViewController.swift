@@ -19,7 +19,51 @@ class ViewController: UIViewController {
     //MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        //Screen lock helper functions
+//        let displayStatusChangedCallback: CFNotificationCallback = { _, cfObserver, cfName, _, _ in
+//            guard let lockState = cfName?.rawValue as? String else {
+//                return
+//            }
+//
+//            let catcher = Unmanaged<MyClassObserving>.fromOpaque(UnsafeRawPointer(OpaquePointer(cfObserver)!)).takeUnretainedValue()
+//            catcher.displayStatusChanged(lockState)
+//        }
+//        func displayStatusChanged(_ lockState: String) {
+//            // the "com.apple.springboard.lockcomplete" notification will always come after the "com.apple.springboard.lockstate" notification
+//            print("Darwin notification NAME = \(lockState)")
+//            if (lockState == "com.apple.springboard.lockcomplete") {
+//                print("DEVICE LOCKED")
+//            } else {
+//                print("LOCK STATUS CHANGED")
+//            }
+//        }
+        let displayStatusChangedCallback: CFNotificationCallback = { _, cfObserver, cfName, _, _ in
+            guard let lockState = cfName?.rawValue as String? else {
+                return
+            }
+            
+            print("Darwin notification NAME = \(lockState)")
+            if (lockState == "com.apple.springboard.lockcomplete") {
+                print("DEVICE LOCKED")
+            } else {
+                print("LOCK STATUS CHANGED")
+            }
+        }
+        
+        //Screen lock notifications obervers
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),     //center
+            Unmanaged.passUnretained(self).toOpaque(),     // observer
+            displayStatusChangedCallback,     // callback
+            "com.apple.springboard.lockcomplete" as CFString,     // event name
+            nil,     // object
+            .deliverImmediately)
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),     //center
+            Unmanaged.passUnretained(self).toOpaque(),     // observer
+            displayStatusChangedCallback,     // callback
+            "com.apple.springboard.lockstate" as CFString,    // event name
+            nil,     // object
+            .deliverImmediately)
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -51,5 +95,11 @@ class ViewController: UIViewController {
         UnlocksToday.text = "You clicked HomeAction"
         UnlocksHr.text = "You clicked HomeAction"
     }
+    
+    //MARK: Background Task Creation,
+    //      lock/unlock event handling
+    
+    
+    
 }
 
