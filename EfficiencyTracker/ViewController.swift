@@ -15,10 +15,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var DailyGoal: UILabel!
     @IBOutlet weak var UnlocksToday: UILabel!
     @IBOutlet weak var UnlocksHr: UILabel!
+    var testURL: String = ""
     
     //MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
+        testURL = "http://localhost:3000"
         //Screen lock helper functions
 //        let displayStatusChangedCallback: CFNotificationCallback = { _, cfObserver, cfName, _, _ in
 //            guard let lockState = cfName?.rawValue as? String else {
@@ -57,6 +59,7 @@ class ViewController: UIViewController {
                 task.resume()
             }
         }
+    
         
         //Screen lock notifications obervers
         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),     //center
@@ -72,8 +75,24 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func basicServerInteraction() -> () {
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let url = URL(string: testURL)!
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+            } else {
+                print(String(describing: response!)) // JSON Serialization
+            }
+        }
+        task.resume()
+    }
+    
     //MARK: Actions
     @IBAction func StartStopAction(_ sender: UIButton) {
+        print("Start button pressed")
+        basicServerInteraction()
 //        TodayGoal.text = "You clicked StartStopAction"
 //        DailyGoal.text = "You clicked StartStopAction"
 //        UnlocksToday.text = "You clicked StartStopAction"
