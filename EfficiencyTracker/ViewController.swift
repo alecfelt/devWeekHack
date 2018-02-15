@@ -43,10 +43,18 @@ class ViewController: UIViewController {
             }
             
             print("Darwin notification NAME = \(lockState)")
-            if (lockState == "com.apple.springboard.lockcomplete") {
-                print("DEVICE LOCKED")
-            } else {
-                print("LOCK STATUS CHANGED")
+            if(lockState == "com.apple.springboard.lockstate") {
+                let config = URLSessionConfiguration.default
+                let session = URLSession(configuration: config)
+                let url = URL(string: "http://18.144.51.46:8080/api")!
+                let task = session.dataTask(with: url) { (data, response, error) in
+                    if error != nil {
+                        print(error!.localizedDescription)
+                    } else {
+                        print(String(describing: response!)) // JSON Serialization
+                    }
+                }
+                task.resume()
             }
         }
         
@@ -54,13 +62,7 @@ class ViewController: UIViewController {
         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),     //center
             Unmanaged.passUnretained(self).toOpaque(),     // observer
             displayStatusChangedCallback,     // callback
-            "com.apple.springboard.lockcomplete" as CFString,     // event name
-            nil,     // object
-            .deliverImmediately)
-        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),     //center
-            Unmanaged.passUnretained(self).toOpaque(),     // observer
-            displayStatusChangedCallback,     // callback
-            "com.apple.springboard.lockstate" as CFString,    // event name
+            "com.apple.springboard.lockstate" as CFString,     // event name
             nil,     // object
             .deliverImmediately)
         
@@ -72,28 +74,28 @@ class ViewController: UIViewController {
     
     //MARK: Actions
     @IBAction func StartStopAction(_ sender: UIButton) {
-        TodayGoal.text = "You clicked StartStopAction"
-        DailyGoal.text = "You clicked StartStopAction"
-        UnlocksToday.text = "You clicked StartStopAction"
-        UnlocksHr.text = "You clicked StartStopAction"
+//        TodayGoal.text = "You clicked StartStopAction"
+//        DailyGoal.text = "You clicked StartStopAction"
+//        UnlocksToday.text = "You clicked StartStopAction"
+//        UnlocksHr.text = "You clicked StartStopAction"
     }
     @IBAction func TimeAction(_ sender: UIButton) {
-        TodayGoal.text = "You clicked TimeAction"
-        DailyGoal.text = "You clicked TimeAction"
-        UnlocksToday.text = "You clicked TimeAction"
-        UnlocksHr.text = "You clicked TimeAction"
+//        TodayGoal.text = "You clicked TimeAction"
+//        DailyGoal.text = "You clicked TimeAction"
+//        UnlocksToday.text = "You clicked TimeAction"
+//        UnlocksHr.text = "You clicked TimeAction"
     }
     @IBAction func PlaceAction(_ sender: UIButton) {
-        TodayGoal.text = "You clicked PlaceAction"
-        DailyGoal.text = "You clicked PlaceAction"
-        UnlocksToday.text = "You clicked PlaceAction"
-        UnlocksHr.text = "You clicked PlaceAction"
+//        TodayGoal.text = "You clicked PlaceAction"
+//        DailyGoal.text = "You clicked PlaceAction"
+//        UnlocksToday.text = "You clicked PlaceAction"
+//        UnlocksHr.text = "You clicked PlaceAction"
     }
     @IBAction func HomeAction(_ sender: UIButton) {
-        TodayGoal.text = "You clicked HomeAction"
-        DailyGoal.text = "You clicked HomeAction"
-        UnlocksToday.text = "You clicked HomeAction"
-        UnlocksHr.text = "You clicked HomeAction"
+//        TodayGoal.text = "You clicked HomeAction"
+//        DailyGoal.text = "You clicked HomeAction"
+//        UnlocksToday.text = "You clicked HomeAction"
+//        UnlocksHr.text = "You clicked HomeAction"
     }
     
     //MARK: Background Task Creation,
