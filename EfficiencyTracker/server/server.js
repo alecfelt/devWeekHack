@@ -4,6 +4,13 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
+const MongoClient = require('mongodb').MongoClient
+
+// Connecting to mongo client
+//MongoClient.connect('link-to-mongodb', (err, database) => {
+
+//})
+
 
 // applying bodyparser middleware to express
 app.use(bodyParser.urlencoded({extended: true}))
@@ -15,12 +22,20 @@ app.listen(3000, function() {
 
 // get request
 app.get('/', (req, res) => {
-  res.send('You are connected')
+  res.send('You just sent a GET request')
 })
 
 // post request
 app.post('/', (req, res) => {
   var a = req.body.name
   console.log(a)
-  res.send('You just posted')
+  res.send('You just sent a POST request')
+})
+
+app.delete('/', (req, res) => {
+  res.send('you just sent a DELETE request')
+})
+
+app.put('/', (req, res) => {
+  res.send('you just sent a PUT request')
 })
