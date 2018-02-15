@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 
 // post request
 app.post('/', (req, res) => {
-  console.log('Someone just posted')
+  var a = req.body
+  console.log(a)
   res.send('You just posted')
 })
