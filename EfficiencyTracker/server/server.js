@@ -1,8 +1,12 @@
 // server.js
 
-// defining express
+// defining constants
 const express = require('express');
+const bodyParser = require('body-parser')
 const app = express();
+
+// applying bodyparser middleware to express
+app.use(bodyParser.urlencoded({extended: true}))
 
 // running server on port 3000
 app.listen(3000, function() {
@@ -16,7 +20,7 @@ app.get('/', (req, res) => {
 
 // post request
 app.post('/', (req, res) => {
-  var a = req.body
+  var a = req.body.name
   console.log(a)
   res.send('You just posted')
 })
