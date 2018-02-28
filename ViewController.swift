@@ -39,6 +39,9 @@ class ViewController: UIViewController {
 //                print("LOCK STATUS CHANGED")
 //            }
 //        }
+        // Code to change the icon on the first TabBar item
+        initWithTabBarSystemItem
+        
         let displayStatusChangedCallback: CFNotificationCallback = { _, cfObserver, cfName, _, _ in
             guard let lockState = cfName?.rawValue as String? else {
                 return

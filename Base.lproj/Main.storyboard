@@ -46,10 +46,11 @@
         <scene sceneID="t1J-bj-id8">
             <objects>
                 <tabBarController id="AJs-ve-Jsg" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vug-KZ-qdf">
+                    <tabBar key="tabBar" tag="5" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" itemPositioning="fill" id="Vug-KZ-qdf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="jZ4-WX-orV" kind="relationship" relationship="viewControllers" id="8cL-OP-c3e"/>
@@ -205,6 +206,7 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bIS-gP-fhS" secondAttribute="trailing" constant="30" id="6l9-g1-ij3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bIS-gP-fhS" secondAttribute="bottom" constant="32" id="7Ll-Dk-bT5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Zyf-tf-VQ0" secondAttribute="bottom" constant="32" id="9S8-xU-AL6"/>
                             <constraint firstItem="KEs-if-1SI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="CvU-Az-FmS"/>
                             <constraint firstItem="KEs-if-1SI" firstAttribute="top" secondItem="vMq-p6-8oR" secondAttribute="bottom" constant="18" id="DB0-aB-TGE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KEs-if-1SI" secondAttribute="bottom" constant="32" id="NmF-Uf-mDb"/>
